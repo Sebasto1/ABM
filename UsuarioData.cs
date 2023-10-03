@@ -15,12 +15,12 @@ namespace ABM
         {
             Usuario usuario = new Usuario();
 
-            string conecctionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
+            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
             string query = "SELECT Id, Nombre, Apellido, NombreUsuario, Contraseña, Mail FROM Usuario Where Id=@Id";
 
             try
             {
-                using (SqlConnection conexion = new SqlConnection(conecctionString))
+                using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
                     conexion.Open();
 
@@ -63,12 +63,12 @@ namespace ABM
         {
             List<Usuario> lista = new List<Usuario>();
 
-            string conecctionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
+            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
             string query = "SELECT Id, Nombre, Apellido, NombreUsuario, Contraseña, Mail FROM Usuario";
 
             try
             {
-                using (SqlConnection conexion = new SqlConnection(conecctionString))
+                using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
                     conexion.Open();
 
@@ -112,13 +112,13 @@ namespace ABM
         public static void CrearUsuario(Usuario usuario)
         {
 
-            string conecctionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
+            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
             string query = "INSERT INTO Usuario (Id, NombreUsuario, Nombre, Apellido, Contraseña, Mail)" +
                 "VALUES(@Id, @NombreUsuario, @Nombre, @Apellido, @Contraseña, @Mail);";
 
             try
             {
-                using (SqlConnection conexion = new SqlConnection(conecctionString))
+                using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
                     conexion.Open();
 
@@ -148,13 +148,13 @@ namespace ABM
 
         public static void ModificarUsuario( Usuario usuario)
         {
-            string conecctionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
+            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
             string query = "UPDATE Usuario " +
                     "SET Id = @Id, NombreUsuario = @NombreUsuario, Nombre = @Nombre, Apellido = @Apellido, Contraseña = @Contraseña, Mail = @Mail " +
                     "WHERE Id = @Id";
             try
             {
-                    using (SqlConnection conexion = new SqlConnection(conecctionString))
+                    using (SqlConnection conexion = new SqlConnection(connectionString))
                     {
                         conexion.Open();
 
@@ -184,12 +184,12 @@ namespace ABM
 
         public static void EliminarUsuario(Usuario usuario)
         {
-            string conecctionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
+            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
             string query = "DELETE FROM Usuario WHERE Id = @Id";
 
             try
             {
-                using (SqlConnection conexion = new SqlConnection(conecctionString))
+                using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
