@@ -26,7 +26,7 @@ namespace ABM
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
-                        comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = id });
+                        comando.Parameters.Add(new SqlParameter("Id", SqlDbType.BigInt) { Value = id });
 
                         using (SqlDataReader dr = comando.ExecuteReader())
                         {

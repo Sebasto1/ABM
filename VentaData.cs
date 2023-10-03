@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace ABM
 {
-    public class ProductoData
+    public class VentaData
     {
-        public static List<Producto> ListarProductos()
+        public static List<Venta> ListarVentas()
         {
-            List<Producto> lista = new List<Producto>();
+            List<Venta> lista = new List<Venta>();
 
             string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id,Descripciones,Costo,PrecioVenta,Stock,IdUsuario FROM Producto";
+            string query = "SELECT Id, Comentarios, IdUsuario FROM Venta";
 
             try
             {
@@ -31,21 +31,18 @@ namespace ABM
                             {
                                 while (dr.Read())
                                 {
-                                    var producto = new Producto();
-                                    producto.Id = Convert.ToInt32(dr["Id"]);
-                                    producto.Descripciones = dr["Descripciones"].ToString();
-                                    producto.Costo = (double)Convert.ToDecimal(dr["Costo"]);
-                                    producto.PrecioVenta = (double)Convert.ToDecimal(dr["PrecioVenta"]);
-                                    producto.Stock = Convert.ToInt32(dr["Stock"]);
-                                    producto.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
+                                    var venta = new Venta();
+                                    venta.Id = Convert.ToInt32(dr["Id"]);
+                                    venta.Comentarios = dr["Comentarios"].ToString();
+                                    venta.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
 
-                                    lista.Add(producto);
+                                    lista.Add(venta);
                                 }
                             }
                         }
                     }
 
-                    
+
                     conexion.Close();
                 }
                 return lista;
@@ -55,11 +52,11 @@ namespace ABM
                 return null;
             }
         }
-        public static Producto ObtenerProducto(int id)
+        public static Venta ObtenerVenta(int id)
         {
-            Producto producto = new Producto();
+            Venta venta = new Venta();
             string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id,Descripciones,Costo,PrecioVenta,Stock,IdUsuario FROM Producto Where Id=@Id";
+            string query = "SELECT Id, Comentarios, IdUsuario FROM Venta Where Id=@Id";
 
             try
             {
@@ -78,32 +75,29 @@ namespace ABM
                             {
                                 while (dr.Read())
                                 {
-                                    producto.Id = Convert.ToInt32(dr["Id"]);
-                                    producto.Descripciones = dr["Descripciones"].ToString();
-                                    producto.Costo = (double)Convert.ToDecimal(dr["Costo"]);
-                                    producto.PrecioVenta = (double)Convert.ToDecimal(dr["PrecioVenta"]);
-                                    producto.Stock = Convert.ToInt32(dr["Stock"]);
-                                    producto.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
+                                    venta.Id = Convert.ToInt32(dr["Id"]);
+                                    venta.Comentarios = dr["Comentarios"].ToString();
+                                    venta.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
                                 }
                             }
                         }
                     }
 
-                    // Opcional
+                    
                     conexion.Close();
                 }
-                return producto;
+                return venta;
             }
             catch (Exception ex)
             {
                 return null;
             }
         }
-        public static void CrearProducto(Producto producto)
+        public static void CrearVenta(Venta venta)
         {
             string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "INSERT INTO Producto (Descripciones,Costo, PrecioVenta,Stock, IdUsuario)" +
-                " VALUES(@Descripcion, @Costo, @PrecioVenta, @Stock, @IdUsuario); ";
+            string query = "INSERT INTO Venta (Comentarios,IdUsuario)" +
+                " VALUES(@Comentarios, @IdUsuario); ";
 
             try
             {
@@ -113,11 +107,8 @@ namespace ABM
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
 
-                        comando.Parameters.Add(new SqlParameter("Descripcion", SqlDbType.VarChar) { Value = producto.Descripciones });
-                        comando.Parameters.Add(new SqlParameter("Costo", SqlDbType.Decimal) { Value = producto.Costo });
-                        comando.Parameters.Add(new SqlParameter("PrecioVenta", SqlDbType.Decimal) { Value = producto.PrecioVenta });
-                        comando.Parameters.Add(new SqlParameter("Stock", SqlDbType.Decimal) { Value = producto.Stock });
-                        comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.BigInt) { Value = producto.IdUsuario });
+                        comando.Parameters.Add(new SqlParameter("Comentarios", SqlDbType.VarChar) { Value = venta.Comentarios });
+                        comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.BigInt) { Value = venta.IdUsuario });
 
                         comando.ExecuteNonQuery();
                     }
@@ -133,11 +124,11 @@ namespace ABM
 
         }
 
-        public static void ModificarProducto(Producto producto)
+        public static void ModificarVenta(Venta venta)
         {
             string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "UPDATE Producto " +
-                "SET Descripciones = @Descripcion ,Costo = @Costo, PrecioVenta = @PrecioVenta,Stock = @Stock, IdUsuario=@IdUsuario " +
+            string query = "UPDATE Venta " +
+                "SET Comentarios = @Comentarios ,IdUsuario = @IdUsuario" +
                 " WHERE Id = @Id";
             try
             {
@@ -146,13 +137,9 @@ namespace ABM
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
-                        comando.Parameters.Add(new SqlParameter("Id", SqlDbType.VarChar) { Value = producto.Id });
-
-                        comando.Parameters.Add(new SqlParameter("Descripcion", SqlDbType.VarChar) { Value = producto.Descripciones });
-                        comando.Parameters.Add(new SqlParameter("Costo", SqlDbType.Decimal) { Value = producto.Costo });
-                        comando.Parameters.Add(new SqlParameter("PrecioVenta", SqlDbType.Decimal) { Value = producto.PrecioVenta });
-                        comando.Parameters.Add(new SqlParameter("Stock", SqlDbType.Decimal) { Value = producto.Stock });
-                        comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.BigInt) { Value = producto.IdUsuario });
+                        comando.Parameters.Add(new SqlParameter("Id", SqlDbType.VarChar) { Value = venta.Id });
+                        comando.Parameters.Add(new SqlParameter("Comentarios", SqlDbType.VarChar) { Value = venta.Comentarios });
+                        comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.BigInt) { Value = venta.IdUsuario });
 
                         comando.ExecuteNonQuery();
                     }
@@ -167,10 +154,10 @@ namespace ABM
             }
         }
 
-        public static void EliminarProducto(Producto producto)
+        public static void EliminarVenta(Venta venta)
         {
             string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "DELETE FROM Producto " +
+            string query = "DELETE FROM Venta " +
                 " WHERE Id = @Id";
             try
             {
@@ -179,7 +166,7 @@ namespace ABM
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
-                        comando.Parameters.Add(new SqlParameter("Id", SqlDbType.VarChar) { Value = producto.Id });
+                        comando.Parameters.Add(new SqlParameter("Id", SqlDbType.VarChar) { Value = venta.Id });
 
                         comando.ExecuteNonQuery();
                     }
