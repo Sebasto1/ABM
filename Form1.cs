@@ -18,7 +18,7 @@ namespace ABM
         public Form1()
         {
             InitializeComponent();
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False"; // Reemplaza con tu cadena de conexión
+            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
             productosData = new ProductoData(connectionString);
         }
 
@@ -42,6 +42,12 @@ namespace ABM
             // Opcional: Configura las columnas si es necesario
             dataGridView1.Columns["Id"].Visible = false; // Puedes ocultar columnas si es necesario
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Ajusta automáticamente el tamaño de las columnas
+        }
+
+        private void btnForm2_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.ShowDialog();
         }
     }
 }
