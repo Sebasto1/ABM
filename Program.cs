@@ -1,22 +1,16 @@
-﻿using System;
-using System.Linq;
-using ABM;
-
-
+﻿using ABM;
+using System;
+using System.Windows.Forms;
 
 public class Program
 {
-    static void Main(string[] args)
+    [STAThread]
+    public static void Main(string[] args)
     {
-        Console.WriteLine("Lista de Productos");
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
 
-        List<Producto> lista = ProductoData.ListarProductos();
-        foreach (var item in lista)
-        {
-            Console.WriteLine("Descripcion " + item.Descripciones);
-
-        }
-
+        // Crea una instancia de tu formulario principal y ábrelo
+        Application.Run(new Form1());
     }
 }
-

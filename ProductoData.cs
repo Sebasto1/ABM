@@ -10,17 +10,21 @@ namespace ABM
 {
     public class ProductoData
     {
-        public static List<Producto> ListarProductos()
+        private string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
+
+        public ProductoData(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
+        public List<Producto> ListarProductos()
         {
             List<Producto> lista = new List<Producto>();
-
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id,Descripciones,Costo,PrecioVenta,Stock,IdUsuario FROM Producto";
-
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "SELECT Id, Descripciones, Costo, PrecioVenta, Stock, IdUsuario FROM Producto";
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -32,12 +36,14 @@ namespace ABM
                                 while (dr.Read())
                                 {
                                     var producto = new Producto();
-                                    producto.Id = Convert.ToInt32(dr["Id"]);
-                                    producto.Descripciones = dr["Descripciones"].ToString();
-                                    producto.Costo = (double)Convert.ToDecimal(dr["Costo"]);
-                                    producto.PrecioVenta = (double)Convert.ToDecimal(dr["PrecioVenta"]);
-                                    producto.Stock = Convert.ToInt32(dr["Stock"]);
-                                    producto.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
+                                    {
+                                        producto.Id = Convert.ToInt32(dr["Id"]);
+                                        producto.Descripciones = dr["Descripciones"].ToString();
+                                        producto.Costo = Convert.ToDouble(dr["Costo"]);
+                                        producto.PrecioVenta = Convert.ToDouble(dr["PrecioVenta"]);
+                                        producto.Stock = Convert.ToInt32(dr["Stock"]);
+                                        producto.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
+                                    }
 
                                     lista.Add(producto);
                                 }
@@ -45,26 +51,30 @@ namespace ABM
                         }
                     }
 
-                    
+
                     conexion.Close();
+
+                    return lista;
                 }
-                return lista;
             }
             catch (Exception ex)
             {
                 return null;
             }
         }
-        public static Producto ObtenerProducto(int id)
+
+            
+
+        }
+        public Producto ObtenerProducto(int id)
         {
             Producto producto = new Producto();
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id,Descripciones,Costo,PrecioVenta,Stock,IdUsuario FROM Producto Where Id=@Id";
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "SELECT Id,Descripciones,Costo,PrecioVenta,Stock,IdUsuario FROM Producto Where Id=@Id";
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -80,8 +90,8 @@ namespace ABM
                                 {
                                     producto.Id = Convert.ToInt32(dr["Id"]);
                                     producto.Descripciones = dr["Descripciones"].ToString();
-                                    producto.Costo = (double)Convert.ToDecimal(dr["Costo"]);
-                                    producto.PrecioVenta = (double)Convert.ToDecimal(dr["PrecioVenta"]);
+                                    producto.Costo = Convert.ToDouble(dr["Costo"]);
+                                    producto.PrecioVenta = Convert.ToDouble(dr["PrecioVenta"]);
                                     producto.Stock = Convert.ToInt32(dr["Stock"]);
                                     producto.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
                                 }
@@ -89,7 +99,7 @@ namespace ABM
                         }
                     }
 
-                    // Opcional
+                    
                     conexion.Close();
                 }
                 return producto;
@@ -99,16 +109,15 @@ namespace ABM
                 return null;
             }
         }
-        public static void CrearProducto(Producto producto)
+        public void CrearProducto(Producto producto)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "INSERT INTO Producto (Descripciones,Costo, PrecioVenta,Stock, IdUsuario)" +
-                " VALUES(@Descripcion, @Costo, @PrecioVenta, @Stock, @IdUsuario); ";
-
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "INSERT INTO Producto (Descripciones,Costo, PrecioVenta,Stock, IdUsuario)" +
+                    "VALUES(@Descripcion, @Costo, @PrecioVenta, @Stock, @IdUsuario); ";
+
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -133,21 +142,21 @@ namespace ABM
 
         }
 
-        public static void ModificarProducto(Producto producto)
+        public void ModificarProducto(Producto producto)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "UPDATE Producto " +
-                "SET Descripciones = @Descripcion ,Costo = @Costo, PrecioVenta = @PrecioVenta,Stock = @Stock, IdUsuario=@IdUsuario " +
-                " WHERE Id = @Id";
+
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "UPDATE Producto " +
+                    "SET Descripciones = @Descripcion ,Costo = @Costo, PrecioVenta = @PrecioVenta,Stock = @Stock, IdUsuario=@IdUsuario " +
+                     " WHERE Id = @Id";
                     conexion.Open();
+
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
                         comando.Parameters.Add(new SqlParameter("Id", SqlDbType.VarChar) { Value = producto.Id });
-
                         comando.Parameters.Add(new SqlParameter("Descripcion", SqlDbType.VarChar) { Value = producto.Descripciones });
                         comando.Parameters.Add(new SqlParameter("Costo", SqlDbType.Decimal) { Value = producto.Costo });
                         comando.Parameters.Add(new SqlParameter("PrecioVenta", SqlDbType.Decimal) { Value = producto.PrecioVenta });
@@ -167,15 +176,16 @@ namespace ABM
             }
         }
 
-        public static void EliminarProducto(Producto producto)
+        public void EliminarProducto(Producto producto)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "DELETE FROM Producto " +
-                " WHERE Id = @Id";
+
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "DELETE FROM Producto " +
+                    " WHERE Id = @Id";
+
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {

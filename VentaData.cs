@@ -10,17 +10,24 @@ namespace ABM
 {
     public class VentaData
     {
-        public static List<Venta> ListarVentas()
+        private string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
+
+        public VentaData(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
+        public List<Venta> ListarVentas()
         {
             List<Venta> lista = new List<Venta>();
 
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id, Comentarios, IdUsuario FROM Venta";
+
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "SELECT Id, Comentarios, IdUsuario FROM Venta";
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -32,9 +39,12 @@ namespace ABM
                                 while (dr.Read())
                                 {
                                     var venta = new Venta();
-                                    venta.Id = Convert.ToInt32(dr["Id"]);
-                                    venta.Comentarios = dr["Comentarios"].ToString();
-                                    venta.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
+                                    {
+                                        venta.Id = Convert.ToInt32(dr["Id"]);
+                                        venta.Comentarios = dr["Comentarios"].ToString();
+                                        venta.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
+                                    }
+
 
                                     lista.Add(venta);
                                 }
@@ -52,16 +62,17 @@ namespace ABM
                 return null;
             }
         }
-        public static Venta ObtenerVenta(int id)
+        public Venta ObtenerVenta(int id)
         {
             Venta venta = new Venta();
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id, Comentarios, IdUsuario FROM Venta Where Id=@Id";
+
+
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "SELECT Id, Comentarios, IdUsuario FROM Venta Where Id=@Id";
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -93,16 +104,17 @@ namespace ABM
                 return null;
             }
         }
-        public static void CrearVenta(Venta venta)
+        public void CrearVenta(Venta venta)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "INSERT INTO Venta (Comentarios,IdUsuario)" +
-                " VALUES(@Comentarios, @IdUsuario); ";
+
+
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "INSERT INTO Venta (Comentarios,IdUsuario)" +
+                    " VALUES(@Comentarios, @IdUsuario); ";
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -124,17 +136,19 @@ namespace ABM
 
         }
 
-        public static void ModificarVenta(Venta venta)
+        public void ModificarVenta(Venta venta)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "UPDATE Venta " +
-                "SET Comentarios = @Comentarios ,IdUsuario = @IdUsuario" +
-                " WHERE Id = @Id";
+
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "UPDATE Venta " +
+                    "SET Comentarios = @Comentarios ,IdUsuario = @IdUsuario" +
+                    " WHERE Id = @Id";
+
                     conexion.Open();
+
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
                         comando.Parameters.Add(new SqlParameter("Id", SqlDbType.VarChar) { Value = venta.Id });
@@ -154,16 +168,19 @@ namespace ABM
             }
         }
 
-        public static void EliminarVenta(Venta venta)
+        public void EliminarVenta(Venta venta)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "DELETE FROM Venta " +
-                " WHERE Id = @Id";
+
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+
+                    string query = "DELETE FROM Venta " +
+                    " WHERE Id = @Id";
+
                     conexion.Open();
+
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
                         comando.Parameters.Add(new SqlParameter("Id", SqlDbType.VarChar) { Value = venta.Id });

@@ -10,17 +10,22 @@ namespace ABM
 {
     public class ProductoVendidoData
     {
-        public static List<ProductoVendido> ListarProductosVendidos()
+
+        private string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
+
+        public ProductoVendidoData(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+        public List<ProductoVendido> ListarProductosVendidos()
         {
             List<ProductoVendido> lista = new List<ProductoVendido>();
-
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id,IdVenta,Stock, IdProducto FROM ProductoVendido";
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "SELECT Id,IdVenta,Stock, IdProducto FROM ProductoVendido";
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -32,10 +37,13 @@ namespace ABM
                                 while (dr.Read())
                                 {
                                     var productoVendido = new ProductoVendido();
-                                    productoVendido.Id = Convert.ToInt32(dr["Id"]);
-                                    productoVendido.IdVenta = Convert.ToInt32(dr["IdVenta"]);
-                                    productoVendido.Stock = Convert.ToInt32(dr["Stock"]);
-                                    productoVendido.IdProducto = Convert.ToInt32(dr["IdProducto"]);
+                                    {
+                                        productoVendido.Id = Convert.ToInt32(dr["Id"]);
+                                        productoVendido.IdVenta = Convert.ToInt32(dr["IdVenta"]);
+                                        productoVendido.Stock = Convert.ToInt32(dr["Stock"]);
+                                        productoVendido.IdProducto = Convert.ToInt32(dr["IdProducto"]);
+                                    }
+
 
                                     lista.Add(productoVendido);
                                 }
@@ -53,16 +61,16 @@ namespace ABM
                 return null;
             }
         }
-        public static ProductoVendido ObtenerProductoVendido(int id)
+        public ProductoVendido ObtenerProductoVendido(int id)
         {
             ProductoVendido productoVendido = new ProductoVendido();
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id,IdVenta,Stock, IdProducto FROM ProductoVendido Where Id=@Id";
+            
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "SELECT Id,IdVenta,Stock, IdProducto FROM ProductoVendido Where Id=@Id";
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -94,11 +102,9 @@ namespace ABM
                 return null;
             }
         }
-        public static void CrearProductoVendido(ProductoVendido productoVendido)
+        public void CrearProductoVendido(ProductoVendido productoVendido)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "INSERT INTO ProductoVendido (IdVenta, Stock, IdProducto)" +
-                " VALUES(@IdVenta, @Stock, @IdProducto); ";
+            
 
             
 
@@ -106,7 +112,11 @@ namespace ABM
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "INSERT INTO ProductoVendido (IdVenta, Stock, IdProducto)" +
+                    " VALUES(@IdVenta, @Stock, @IdProducto); ";
+
                     conexion.Open();
+
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
 
@@ -117,6 +127,7 @@ namespace ABM
 
                         comando.ExecuteNonQuery();
                     }
+
                     conexion.Close();
                 }
             }
@@ -129,16 +140,18 @@ namespace ABM
 
         }
 
-        public static void ModificarProductoVendido(ProductoVendido productoVendido)
+        public void ModificarProductoVendido(ProductoVendido productoVendido)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "UPDATE ProductoVendido " +
-                "SET IdVenta = @IdVenta ,Stock = @Stock, IdProducto = @IdProducto" +
-                " WHERE Id = @Id";
+         
+
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "UPDATE ProductoVendido " +
+                    "SET IdVenta = @IdVenta ,Stock = @Stock, IdProducto = @IdProducto" +
+                    " WHERE Id = @Id";
+
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -160,15 +173,17 @@ namespace ABM
             }
         }
 
-        public static void EliminarProductoVendido(ProductoVendido productoVendido)
+        public void EliminarProductoVendido(ProductoVendido productoVendido)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "DELETE FROM ProductoVendido " +
-                " WHERE Id = @Id";
+
+
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "DELETE FROM ProductoVendido " +
+                    " WHERE Id = @Id";
+
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {

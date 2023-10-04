@@ -10,18 +10,26 @@ namespace ABM
 {
     public class UsuarioData
     {
+        private string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
 
-        public static Usuario ObtenerUsuario(int id)
+        public UsuarioData(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
+
+        public Usuario ObtenerUsuario(int id)
         {
             Usuario usuario = new Usuario();
 
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id, Nombre, Apellido, NombreUsuario, Contraseña, Mail FROM Usuario Where Id=@Id";
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+
+                    string query = "SELECT Id, Nombre, Apellido, NombreUsuario, Contraseña, Mail FROM Usuario Where Id=@Id";
+
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -59,17 +67,18 @@ namespace ABM
 
         }
 
-        public static List<Usuario> ListarUsuarios()
+        public List<Usuario> ListarUsuarios()
         {
             List<Usuario> lista = new List<Usuario>();
 
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "SELECT Id, Nombre, Apellido, NombreUsuario, Contraseña, Mail FROM Usuario";
+
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "SELECT Id, Nombre, Apellido, NombreUsuario, Contraseña, Mail FROM Usuario";
+
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -82,12 +91,15 @@ namespace ABM
                                 while (dr.Read())
                                 {
                                     var usuario = new Usuario();
-                                    usuario.Id = Convert.ToInt32(dr["Id"]);
-                                    usuario.NombreUsuario = dr["NombreUsuario"].ToString();
-                                    usuario.Nombre = dr["Nombre"].ToString();
-                                    usuario.Apellido = dr["Apellido"].ToString();
-                                    usuario.Contraseña = dr["Contraseña"].ToString();
-                                    usuario.Mail = dr["Mail"].ToString();
+                                    {
+                                        usuario.Id = Convert.ToInt32(dr["Id"]);
+                                        usuario.NombreUsuario = dr["NombreUsuario"].ToString();
+                                        usuario.Nombre = dr["Nombre"].ToString();
+                                        usuario.Apellido = dr["Apellido"].ToString();
+                                        usuario.Contraseña = dr["Contraseña"].ToString();
+                                        usuario.Mail = dr["Mail"].ToString();
+                                    }
+
 
                                     lista.Add(usuario);
                                 }
@@ -109,17 +121,17 @@ namespace ABM
 
         }
 
-        public static void CrearUsuario(Usuario usuario)
+        public void CrearUsuario(Usuario usuario)
         {
 
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "INSERT INTO Usuario (Id, NombreUsuario, Nombre, Apellido, Contraseña, Mail)" +
-                "VALUES(@Id, @NombreUsuario, @Nombre, @Apellido, @Contraseña, @Mail);";
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "INSERT INTO Usuario (Id, NombreUsuario, Nombre, Apellido, Contraseña, Mail)" +
+                    "VALUES(@Id, @NombreUsuario, @Nombre, @Apellido, @Contraseña, @Mail);";
+
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -146,16 +158,16 @@ namespace ABM
 
         }
 
-        public static void ModificarUsuario( Usuario usuario)
+        public void ModificarUsuario( Usuario usuario)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "UPDATE Usuario " +
-                    "SET Id = @Id, NombreUsuario = @NombreUsuario, Nombre = @Nombre, Apellido = @Apellido, Contraseña = @Contraseña, Mail = @Mail " +
-                    "WHERE Id = @Id";
+
             try
             {
                     using (SqlConnection conexion = new SqlConnection(connectionString))
                     {
+                        string query = "UPDATE Usuario " +
+                        "SET Id = @Id, NombreUsuario = @NombreUsuario, Nombre = @Nombre, Apellido = @Apellido, Contraseña = @Contraseña, Mail = @Mail " +
+                        "WHERE Id = @Id";
                         conexion.Open();
 
                         using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -172,7 +184,9 @@ namespace ABM
 
 
                         }
-                        conexion.Close();
+
+                       conexion.Close();
+
                     }
             }
              catch (Exception ex)
@@ -182,16 +196,17 @@ namespace ABM
 
         }
 
-        public static void EliminarUsuario(Usuario usuario)
+        public void EliminarUsuario(Usuario usuario)
         {
-            string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True";
-            string query = "DELETE FROM Usuario WHERE Id = @Id";
+            
 
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
+                    string query = "DELETE FROM Usuario WHERE Id = @Id";
                     conexion.Open();
+
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
                         comando.Parameters.Add(new SqlParameter("Id", SqlDbType.BigInt) { Value = usuario.Id });
