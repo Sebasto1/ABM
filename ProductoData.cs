@@ -22,6 +22,9 @@ namespace ABM
             List<Producto> lista = new List<Producto>();
             try
             {
+
+
+
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
                     string query = "SELECT Id, Descripciones, Costo, PrecioVenta, Stock, IdUsuario FROM Producto";
@@ -56,14 +59,11 @@ namespace ABM
 
                     return lista;
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex) 
             {
                 return null;
             }
-        }
 
-            
 
         }
         public Producto ObtenerProducto(int id)
