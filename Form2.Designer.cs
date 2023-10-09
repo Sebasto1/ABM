@@ -38,6 +38,7 @@
             txtIDUsuario = new TextBox();
             txtPrecioVenta = new TextBox();
             txtDescripcion = new TextBox();
+            btnSave = new Button();
             SuspendLayout();
             // 
             // lblIDUsuario
@@ -123,6 +124,7 @@
             txtPrecioVenta.Name = "txtPrecioVenta";
             txtPrecioVenta.Size = new Size(150, 31);
             txtPrecioVenta.TabIndex = 8;
+            txtPrecioVenta.TextChanged += txtPrecioVenta_TextChanged;
             // 
             // txtDescripcion
             // 
@@ -130,6 +132,17 @@
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(150, 31);
             txtDescripcion.TabIndex = 9;
+            txtDescripcion.TextChanged += txtDescripcion_TextChanged;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(592, 182);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(112, 34);
+            btnSave.TabIndex = 10;
+            btnSave.Text = "Guardar";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // Form2
             // 
@@ -137,6 +150,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnSave);
             Controls.Add(txtDescripcion);
             Controls.Add(txtPrecioVenta);
             Controls.Add(txtIDUsuario);
@@ -165,5 +179,6 @@
         private TextBox txtIDUsuario;
         private TextBox txtPrecioVenta;
         private TextBox txtDescripcion;
+        private Button btnSave;
     }
 }

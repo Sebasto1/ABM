@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
-            btnCargarDatos = new Button();
-            button1 = new Button();
-            btnForm2 = new Button();
+            btnModificarDatos = new Button();
+            btnRecargarBD = new Button();
+            btnCrear = new Button();
+            btnBuscar = new Button();
+            btnEliminar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -42,47 +44,68 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(836, 225);
+            dataGridView1.Size = new Size(633, 225);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // btnCargarDatos
+            // btnModificarDatos
             // 
-            btnCargarDatos.Location = new Point(12, 324);
-            btnCargarDatos.Name = "btnCargarDatos";
-            btnCargarDatos.Size = new Size(195, 34);
-            btnCargarDatos.TabIndex = 1;
-            btnCargarDatos.Text = "Listar Productos";
-            btnCargarDatos.UseVisualStyleBackColor = true;
-            btnCargarDatos.Click += btnCargarDatos_Click;
+            btnModificarDatos.Location = new Point(227, 324);
+            btnModificarDatos.Name = "btnModificarDatos";
+            btnModificarDatos.Size = new Size(195, 34);
+            btnModificarDatos.TabIndex = 1;
+            btnModificarDatos.Text = "Modificar";
+            btnModificarDatos.UseVisualStyleBackColor = true;
+            btnModificarDatos.Click += btnModificarDatos_Click;
             // 
-            // button1
+            // btnRecargarBD
             // 
-            button1.Location = new Point(504, 324);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 34);
-            button1.TabIndex = 2;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnRecargarBD.Location = new Point(707, 142);
+            btnRecargarBD.Name = "btnRecargarBD";
+            btnRecargarBD.Size = new Size(112, 34);
+            btnRecargarBD.TabIndex = 2;
+            btnRecargarBD.Text = "Recargar";
+            btnRecargarBD.UseVisualStyleBackColor = true;
+            btnRecargarBD.Click += btnRecargarBD_Click;
             // 
-            // btnForm2
+            // btnCrear
             // 
-            btnForm2.Location = new Point(259, 324);
-            btnForm2.Name = "btnForm2";
-            btnForm2.Size = new Size(169, 34);
-            btnForm2.TabIndex = 3;
-            btnForm2.Text = "Crear Producto";
-            btnForm2.UseVisualStyleBackColor = true;
-            btnForm2.Click += btnForm2_Click;
+            btnCrear.Location = new Point(21, 324);
+            btnCrear.Name = "btnCrear";
+            btnCrear.Size = new Size(169, 34);
+            btnCrear.TabIndex = 3;
+            btnCrear.Text = "Crear Nuevo";
+            btnCrear.UseVisualStyleBackColor = true;
+            btnCrear.Click += btnForm2_Click;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.Location = new Point(643, 324);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(112, 34);
+            btnBuscar.TabIndex = 5;
+            btnBuscar.Text = "Buscar";
+            btnBuscar.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.Location = new Point(473, 324);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(112, 34);
+            btnEliminar.TabIndex = 6;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(860, 528);
-            Controls.Add(btnForm2);
-            Controls.Add(button1);
-            Controls.Add(btnCargarDatos);
+            Controls.Add(btnEliminar);
+            Controls.Add(btnBuscar);
+            Controls.Add(btnCrear);
+            Controls.Add(btnRecargarBD);
+            Controls.Add(btnModificarDatos);
             Controls.Add(dataGridView1);
             Name = "Form1";
             Text = "Form1";
@@ -94,8 +117,10 @@
         #endregion
 
         private DataGridView dataGridView1;
-        private Button btnCargarDatos;
-        private Button button1;
-        private Button btnForm2;
+        private Button btnModificarDatos;
+        private Button btnRecargarBD;
+        private Button btnCrear;
+        private Button btnBuscar;
+        private Button btnEliminar;
     }
 }

@@ -10,24 +10,16 @@ namespace ABM
 {
     public class ProductoData
     {
-        private string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
+        private static string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
 
-        public ProductoData(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
-
-        public List<Producto> ListarProductos()
+        public static List<Producto> ListarProductos()
         {
             List<Producto> lista = new List<Producto>();
             try
             {
-
-
-
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT Id, Descripciones, Costo, PrecioVenta, Stock, IdUsuario FROM Producto";
+                    string query = "SELECT Id, IdUsuario, Costo, PrecioVenta, Stock,Descripciones FROM Producto";
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -41,11 +33,12 @@ namespace ABM
                                     var producto = new Producto();
                                     {
                                         producto.Id = Convert.ToInt32(dr["Id"]);
+                                        producto.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
                                         producto.Descripciones = dr["Descripciones"].ToString();
                                         producto.Costo = Convert.ToDouble(dr["Costo"]);
                                         producto.PrecioVenta = Convert.ToDouble(dr["PrecioVenta"]);
                                         producto.Stock = Convert.ToInt32(dr["Stock"]);
-                                        producto.IdUsuario = Convert.ToInt32(dr["IdUsuario"]);
+                                        
                                     }
 
                                     lista.Add(producto);
@@ -66,7 +59,7 @@ namespace ABM
 
 
         }
-        public Producto ObtenerProducto(int id)
+        public static Producto ObtenerProducto(int id)
         {
             Producto producto = new Producto();
 
@@ -109,7 +102,7 @@ namespace ABM
                 return null;
             }
         }
-        public void CrearProducto(Producto producto)
+        public static void CrearProducto(Producto producto)
         {
             try
             {
@@ -121,12 +114,12 @@ namespace ABM
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
-
+                        comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.BigInt) { Value = producto.IdUsuario });
                         comando.Parameters.Add(new SqlParameter("Descripcion", SqlDbType.VarChar) { Value = producto.Descripciones });
                         comando.Parameters.Add(new SqlParameter("Costo", SqlDbType.Decimal) { Value = producto.Costo });
                         comando.Parameters.Add(new SqlParameter("PrecioVenta", SqlDbType.Decimal) { Value = producto.PrecioVenta });
                         comando.Parameters.Add(new SqlParameter("Stock", SqlDbType.Decimal) { Value = producto.Stock });
-                        comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.BigInt) { Value = producto.IdUsuario });
+
 
                         comando.ExecuteNonQuery();
                     }
@@ -142,7 +135,7 @@ namespace ABM
 
         }
 
-        public void ModificarProducto(Producto producto)
+        public static void ModificarProducto(Producto producto)
         {
 
             try
@@ -176,7 +169,7 @@ namespace ABM
             }
         }
 
-        public void EliminarProducto(Producto producto)
+        public static void EliminarProducto(Producto producto)
         {
 
             try
