@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace ABM
 {
-    public partial class Form2 : Form
+    public partial class FormCrearProducto : Form
     {
-        
 
-        public Form2()
+
+        public FormCrearProducto()
         {
             InitializeComponent();
         }

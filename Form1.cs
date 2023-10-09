@@ -27,26 +27,26 @@ namespace ABM
             dataGridView1.DataSource = productos;
 
             // Opcional: Configura las columnas si es necesario
-            dataGridView1.Columns["Id"].Visible = false; // Puedes ocultar columnas si es necesario
+            dataGridView1.Columns["Id"].Visible = true; // Puedes ocultar columnas si es necesario
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Ajusta automáticamente el tamaño de las columnas
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-                if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
-                {
-                    // Obtén el producto seleccionado
-                    DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
-                    Producto productoSeleccionado = (Producto)selectedRow.DataBoundItem;
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
+            {
+                // Obtén el producto seleccionado
+                DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
+                Producto productoSeleccionado = (Producto)selectedRow.DataBoundItem;
 
-                    // Abre el formulario para modificar el producto
-                    FormModificarProducto formModificarProducto = new FormModificarProducto(productoSeleccionado, productoData);
-                    formModificarProducto.ShowDialog();
+                // Abre el formulario para modificar el producto
+                FormModificarProducto formModificarProducto = new FormModificarProducto(productoSeleccionado, productoData);
+                formModificarProducto.ShowDialog();
 
-                    // Actualiza la lista de productos después de modificar
-                    MostrarListaProductos();
-                }
-         
+                // Actualiza la lista de productos después de modificar
+                MostrarListaProductos();
+            }
+
 
         }
 
@@ -57,12 +57,12 @@ namespace ABM
 
         private void btnModificarDatos_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnForm2_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
+            FormCrearProducto form2 = new FormCrearProducto();
             form2.Show();
         }
 
@@ -71,6 +71,12 @@ namespace ABM
         private void btnRecargarBD_Click(object sender, EventArgs e)
         {
             MostrarListaProductos();
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            FormBuscarProducto formBuscarProducto = new FormBuscarProducto();
+            formBuscarProducto.Show();
         }
     }
 }

@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
-            btnModificarDatos = new Button();
             btnRecargarBD = new Button();
             btnCrear = new Button();
             btnBuscar = new Button();
-            btnEliminar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -48,16 +46,6 @@
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // btnModificarDatos
-            // 
-            btnModificarDatos.Location = new Point(227, 324);
-            btnModificarDatos.Name = "btnModificarDatos";
-            btnModificarDatos.Size = new Size(195, 34);
-            btnModificarDatos.TabIndex = 1;
-            btnModificarDatos.Text = "Modificar";
-            btnModificarDatos.UseVisualStyleBackColor = true;
-            btnModificarDatos.Click += btnModificarDatos_Click;
-            // 
             // btnRecargarBD
             // 
             btnRecargarBD.Location = new Point(707, 142);
@@ -70,7 +58,7 @@
             // 
             // btnCrear
             // 
-            btnCrear.Location = new Point(21, 324);
+            btnCrear.Location = new Point(12, 324);
             btnCrear.Name = "btnCrear";
             btnCrear.Size = new Size(169, 34);
             btnCrear.TabIndex = 3;
@@ -80,35 +68,25 @@
             // 
             // btnBuscar
             // 
-            btnBuscar.Location = new Point(643, 324);
+            btnBuscar.Location = new Point(469, 324);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(112, 34);
+            btnBuscar.Size = new Size(176, 34);
             btnBuscar.TabIndex = 5;
-            btnBuscar.Text = "Buscar";
+            btnBuscar.Text = "Buscar y/o Eliminar";
             btnBuscar.UseVisualStyleBackColor = true;
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.Location = new Point(473, 324);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(112, 34);
-            btnEliminar.TabIndex = 6;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(860, 528);
-            Controls.Add(btnEliminar);
             Controls.Add(btnBuscar);
             Controls.Add(btnCrear);
             Controls.Add(btnRecargarBD);
-            Controls.Add(btnModificarDatos);
             Controls.Add(dataGridView1);
             Name = "Form1";
-            Text = "Form1";
+            Text = "ABM";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
@@ -117,10 +95,8 @@
         #endregion
 
         private DataGridView dataGridView1;
-        private Button btnModificarDatos;
         private Button btnRecargarBD;
         private Button btnCrear;
         private Button btnBuscar;
-        private Button btnEliminar;
     }
 }

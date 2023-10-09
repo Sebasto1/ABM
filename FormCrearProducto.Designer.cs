@@ -1,6 +1,6 @@
 ﻿namespace ABM
 {
-    partial class Form2
+    partial class FormCrearProducto
     {
         /// <summary>
         /// Required designer variable.
@@ -144,11 +144,11 @@
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
-            // Form2
+            // FormCrearProducto
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaptionText;
+            BackColor = Color.AliceBlue;
             ClientSize = new Size(800, 450);
             Controls.Add(btnSave);
             Controls.Add(txtDescripcion);
@@ -161,8 +161,8 @@
             Controls.Add(lblStock);
             Controls.Add(lblCosto);
             Controls.Add(lblIDUsuario);
-            Name = "Form2";
-            Text = "Form2";
+            Name = "FormCrearProducto";
+            Text = "Crear Producto";
             ResumeLayout(false);
             PerformLayout();
         }
