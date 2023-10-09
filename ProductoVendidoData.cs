@@ -11,13 +11,9 @@ namespace ABM
     public class ProductoVendidoData
     {
 
-        private string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
+        private static string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
 
-        public ProductoVendidoData(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
-        public List<ProductoVendido> ListarProductosVendidos()
+        public static List<ProductoVendido> ListarProductosVendidos()
         {
             List<ProductoVendido> lista = new List<ProductoVendido>();
 
@@ -61,7 +57,7 @@ namespace ABM
                 return null;
             }
         }
-        public ProductoVendido ObtenerProductoVendido(int id)
+        public static ProductoVendido ObtenerProductoVendido(int id)
         {
             ProductoVendido productoVendido = new ProductoVendido();
             
@@ -102,7 +98,7 @@ namespace ABM
                 return null;
             }
         }
-        public void CrearProductoVendido(ProductoVendido productoVendido)
+        public static void CrearProductoVendido(ProductoVendido productoVendido)
         {
             
 
@@ -140,7 +136,7 @@ namespace ABM
 
         }
 
-        public void ModificarProductoVendido(ProductoVendido productoVendido)
+        public static void ModificarProductoVendido(ProductoVendido productoVendido)
         {
          
 
@@ -173,7 +169,7 @@ namespace ABM
             }
         }
 
-        public void EliminarProductoVendido(ProductoVendido productoVendido)
+        public static void EliminarProductoVendido(ProductoVendido productoVendido)
         {
 
 

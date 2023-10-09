@@ -52,7 +52,8 @@ namespace ABM
 
                     return lista;
                 }
-            } catch(Exception ex) 
+            } 
+            catch(Exception ex) 
             {
                 return null;
             }

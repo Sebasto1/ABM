@@ -10,15 +10,10 @@ namespace ABM
 {
     public class UsuarioData
     {
-        private string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
-
-        public UsuarioData(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
+        private static string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
 
 
-        public Usuario ObtenerUsuario(int id)
+        public static Usuario ObtenerUsuario(int id)
         {
             Usuario usuario = new Usuario();
 
@@ -52,22 +47,24 @@ namespace ABM
                                 }
                             }
                         }
-                        conexion.Close();
+                        
 
 
                     }
+
+                    conexion.Close();
                 }   
-                
                 return usuario;
 
-            } catch(Exception ex)
+            } 
+            catch(Exception ex)
             {
                 return null;
             }
 
         }
 
-        public List<Usuario> ListarUsuarios()
+        public static List<Usuario> ListarUsuarios()
         {
             List<Usuario> lista = new List<Usuario>();
 
@@ -105,14 +102,10 @@ namespace ABM
                                 }
                             }
                         }
-                        conexion.Close();
-
-
                     }
+                    conexion.Close();
+                    return lista;
                 }
-
-                return lista;
-
             }
             catch (Exception ex)
             {
@@ -121,7 +114,7 @@ namespace ABM
 
         }
 
-        public void CrearUsuario(Usuario usuario)
+        public static void CrearUsuario(Usuario usuario)
         {
 
 
@@ -158,7 +151,7 @@ namespace ABM
 
         }
 
-        public void ModificarUsuario( Usuario usuario)
+        public static void ModificarUsuario( Usuario usuario)
         {
 
             try
@@ -196,7 +189,7 @@ namespace ABM
 
         }
 
-        public void EliminarUsuario(Usuario usuario)
+        public static void EliminarUsuario(Usuario usuario)
         {
             
 
@@ -221,7 +214,5 @@ namespace ABM
                 throw;
             }
         }
-
-
     }
 }

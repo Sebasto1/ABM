@@ -10,19 +10,11 @@ namespace ABM
 {
     public class VentaData
     {
-        private string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
+        private static string connectionString = @"Server=Sebasto;Database=SistemaGestion;Trusted_Connection=True;Encrypt=False";
 
-        public VentaData(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
-
-        public List<Venta> ListarVentas()
+        public static List<Venta> ListarVentas()
         {
             List<Venta> lista = new List<Venta>();
-
-
-
             try
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
@@ -62,11 +54,9 @@ namespace ABM
                 return null;
             }
         }
-        public Venta ObtenerVenta(int id)
+        public static Venta ObtenerVenta(int id)
         {
             Venta venta = new Venta();
-
-
 
             try
             {
@@ -104,10 +94,8 @@ namespace ABM
                 return null;
             }
         }
-        public void CrearVenta(Venta venta)
+        public static void CrearVenta(Venta venta)
         {
-
-
 
             try
             {
@@ -115,6 +103,7 @@ namespace ABM
                 {
                     string query = "INSERT INTO Venta (Comentarios,IdUsuario)" +
                     " VALUES(@Comentarios, @IdUsuario); ";
+
                     conexion.Open();
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -136,7 +125,7 @@ namespace ABM
 
         }
 
-        public void ModificarVenta(Venta venta)
+        public static void ModificarVenta(Venta venta)
         {
 
             try
@@ -168,7 +157,7 @@ namespace ABM
             }
         }
 
-        public void EliminarVenta(Venta venta)
+        public static void EliminarVenta(Venta venta)
         {
 
             try
