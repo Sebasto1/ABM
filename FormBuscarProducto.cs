@@ -94,6 +94,15 @@ namespace ABM
             txtStock.Clear();
 
         }
+
+        private void lblBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+        }
     }
 
 

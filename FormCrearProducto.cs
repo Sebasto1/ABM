@@ -68,5 +68,10 @@ namespace ABM
         {
 
         }
+
+        private void FormCrearProducto_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -122,14 +122,14 @@ namespace ABM
             {
                 using (SqlConnection conexion = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Usuario (Id, NombreUsuario, Nombre, Apellido, Contraseña, Mail)" +
-                    "VALUES(@Id, @NombreUsuario, @Nombre, @Apellido, @Contraseña, @Mail);";
+                    string query = "INSERT INTO Usuario (NombreUsuario, Nombre, Apellido, Contraseña, Mail)" +
+                    "VALUES(@NombreUsuario, @Nombre, @Apellido, @Contraseña, @Mail);";
 
                     conexion.Open();
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
-                        comando.Parameters.Add(new SqlParameter("Id", SqlDbType.BigInt) { Value = usuario.Id});
+                        
                         comando.Parameters.Add(new SqlParameter("NombreUsuario", SqlDbType.VarChar) { Value = usuario.NombreUsuario});
                         comando.Parameters.Add(new SqlParameter("Nombre", SqlDbType.VarChar) { Value = usuario.Nombre});
                         comando.Parameters.Add(new SqlParameter("Apellido", SqlDbType.VarChar) { Value = usuario.Apellido});
@@ -159,13 +159,13 @@ namespace ABM
                     using (SqlConnection conexion = new SqlConnection(connectionString))
                     {
                         string query = "UPDATE Usuario " +
-                        "SET Id = @Id, NombreUsuario = @NombreUsuario, Nombre = @Nombre, Apellido = @Apellido, Contraseña = @Contraseña, Mail = @Mail " +
+                        "SET NombreUsuario = @NombreUsuario, Nombre = @Nombre, Apellido = @Apellido, Contraseña = @Contraseña, Mail = @Mail " +
                         "WHERE Id = @Id";
                         conexion.Open();
 
                         using (SqlCommand comando = new SqlCommand(query, conexion))
                         {
-                            comando.Parameters.Add(new SqlParameter("Id", SqlDbType.BigInt) { Value = usuario.Id });
+                            
                             comando.Parameters.Add(new SqlParameter("NombreUsuario", SqlDbType.VarChar) { Value = usuario.NombreUsuario });
                             comando.Parameters.Add(new SqlParameter("Nombre", SqlDbType.VarChar) { Value = usuario.Nombre });
                             comando.Parameters.Add(new SqlParameter("Apellido", SqlDbType.VarChar) { Value = usuario.Apellido });

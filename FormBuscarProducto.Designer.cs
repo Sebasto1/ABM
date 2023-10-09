@@ -147,6 +147,7 @@
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(302, 31);
             txtBuscar.TabIndex = 32;
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
             // lblBuscar
             // 
@@ -158,6 +159,7 @@
             lblBuscar.TabIndex = 33;
             lblBuscar.Text = "Ingresar ID";
             lblBuscar.TextAlign = ContentAlignment.TopCenter;
+            lblBuscar.Click += lblBuscar_Click;
             // 
             // btnBuscar
             // 

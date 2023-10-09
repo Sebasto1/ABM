@@ -10,26 +10,26 @@ using System.Windows.Forms;
 
 namespace ABM
 {
-    public partial class Form1 : Form
+    public partial class FormInicialUsuario : Form
     {
-        private ProductoData productoData;
-        public Form1()
+        private UsuarioData usuarioData;
+
+        public FormInicialUsuario()
         {
             InitializeComponent();
-
         }
-
-        private void MostrarListaProductos()
+        private void MostrarListaUsuarios()
         {
-            List<Producto> productos = ProductoData.ListarProductos();
+            List<Usuario> usuarios = UsuarioData.ListarUsuarios();
 
             // Asigna la lista de productos al DataGridView
-            dataGridView1.DataSource = productos;
+            dataGridView1.DataSource = usuarios;
 
             // Opcional: Configura las columnas si es necesario
             dataGridView1.Columns["Id"].Visible = true; // Puedes ocultar columnas si es necesario
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Ajusta automáticamente el tamaño de las columnas
         }
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -37,46 +37,34 @@ namespace ABM
             {
                 // Obtén el producto seleccionado
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
-                Producto productoSeleccionado = (Producto)selectedRow.DataBoundItem;
+                Usuario usuarioSeleccionado = (Usuario)selectedRow.DataBoundItem;
 
                 // Abre el formulario para modificar el producto
-                FormModificarProducto formModificarProducto = new FormModificarProducto(productoSeleccionado, productoData);
-                formModificarProducto.ShowDialog();
+                FormModificarUsuario formModificarUsuario = new FormModificarUsuario(usuarioSeleccionado, usuarioData);
+                formModificarUsuario.ShowDialog();
 
                 // Actualiza la lista de productos después de modificar
-                MostrarListaProductos();
+                MostrarListaUsuarios();
             }
-
-
         }
 
-        public void Form1_Load(object sender, EventArgs e)
+        private void btnCrear_Click(object sender, EventArgs e)
         {
-            MostrarListaProductos();
-        }
-
-        private void btnModificarDatos_Click(object sender, EventArgs e)
-        {
+            FormCrearUsuario formCrearUsuario = new FormCrearUsuario();
+            formCrearUsuario.Show();
 
         }
-
-        private void btnForm2_Click(object sender, EventArgs e)
-        {
-            FormCrearProducto form2 = new FormCrearProducto();
-            form2.Show();
-        }
-
-
 
         private void btnRecargarBD_Click(object sender, EventArgs e)
         {
-            MostrarListaProductos();
+            MostrarListaUsuarios();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            FormBuscarProducto formBuscarProducto = new FormBuscarProducto();
-            formBuscarProducto.Show();
+            FormBuscarUsuario formBuscarUsuario = new FormBuscarUsuario();
+            formBuscarUsuario.Show();
+
         }
     }
 }

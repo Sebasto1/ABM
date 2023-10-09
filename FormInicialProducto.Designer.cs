@@ -1,6 +1,6 @@
 ﻿namespace ABM
 {
-    partial class Form1
+    partial class FormInicialProducto
     {
         /// <summary>
         /// Required designer variable.

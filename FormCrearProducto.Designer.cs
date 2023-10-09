@@ -163,6 +163,7 @@
             Controls.Add(lblIDUsuario);
             Name = "FormCrearProducto";
             Text = "Crear Producto";
+            Load += FormCrearProducto_Load;
             ResumeLayout(false);
             PerformLayout();
         }
