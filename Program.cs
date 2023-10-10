@@ -11,6 +11,6 @@ public class Program
         Application.SetCompatibleTextRenderingDefault(false);
 
         // Crea una instancia de tu formulario principal y ábrelo
-        Application.Run(new FormInicialUsuario());
+        Application.Run(new FormInicialProductoVendido());
     }
 }

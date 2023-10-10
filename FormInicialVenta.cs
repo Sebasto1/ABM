@@ -10,26 +10,30 @@ using System.Windows.Forms;
 
 namespace ABM
 {
-    public partial class FormInicialUsuario : Form
+    public partial class FormInicialVenta : Form
     {
-        private UsuarioData usuarioData;
-
-        public FormInicialUsuario()
+        private VentaData ventaData;
+        public FormInicialVenta()
         {
             InitializeComponent();
         }
-        private void MostrarListaUsuarios()
+
+        private void MostrarListaVentas()
         {
-            List<Usuario> usuarios = UsuarioData.ListarUsuarios();
+            List<Venta> ventas = VentaData.ListarVentas();
 
             // Asigna la lista de productos al DataGridView
-            dataGridView1.DataSource = usuarios;
+            dataGridView1.DataSource = ventas;
 
             // Opcional: Configura las columnas si es necesario
             dataGridView1.Columns["Id"].Visible = true; // Puedes ocultar columnas si es necesario
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Ajusta automáticamente el tamaño de las columnas
         }
 
+        private void FormInicialVenta_Load(object sender, EventArgs e)
+        {
+            MostrarListaVentas();
+        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -37,39 +41,32 @@ namespace ABM
             {
                 // Obtén el producto seleccionado
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
-                Usuario usuarioSeleccionado = (Usuario)selectedRow.DataBoundItem;
+                Venta ventaSeleccionado = (Venta)selectedRow.DataBoundItem;
 
                 // Abre el formulario para modificar el producto
-                FormModificarUsuario formModificarUsuario = new FormModificarUsuario(usuarioSeleccionado, usuarioData);
-                formModificarUsuario.ShowDialog();
+                FormModificarVenta formModificarVenta = new FormModificarVenta(ventaSeleccionado);
+                formModificarVenta.ShowDialog();
 
                 // Actualiza la lista de productos después de modificar
-                MostrarListaUsuarios();
+                MostrarListaVentas();
             }
-        }
-
-        private void btnCrear_Click(object sender, EventArgs e)
-        {
-            FormCrearUsuario formCrearUsuario = new FormCrearUsuario();
-            formCrearUsuario.Show();
-
         }
 
         private void btnRecargarBD_Click(object sender, EventArgs e)
         {
-            MostrarListaUsuarios();
+            MostrarListaVentas();
+        }
+
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            FormCrearVenta formCrearVenta = new FormCrearVenta();
+            formCrearVenta.Show();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            FormBuscarUsuario formBuscarUsuario = new FormBuscarUsuario();
-            formBuscarUsuario.Show();
-
-        }
-
-        private void FormInicialUsuario_Load(object sender, EventArgs e)
-        {
-            MostrarListaUsuarios();
+            FormBuscarVenta formBuscarVenta = new FormBuscarVenta();
+            formBuscarVenta.Show();
         }
     }
 }
