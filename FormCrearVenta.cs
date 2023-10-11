@@ -22,7 +22,8 @@ namespace ABM
 
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
             int idUsuario;
             string comentarios = txtComentarios.Text;

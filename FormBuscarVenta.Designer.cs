@@ -42,6 +42,7 @@
             // 
             // txtId
             // 
+            txtId.Enabled = false;
             txtId.Location = new Point(52, 108);
             txtId.Name = "txtId";
             txtId.Size = new Size(150, 31);
@@ -67,6 +68,7 @@
             btnEliminar.TabIndex = 61;
             btnEliminar.Text = "ELIMINAR";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click_1;
             // 
             // btnBuscar
             // 
@@ -77,6 +79,7 @@
             btnBuscar.TabIndex = 60;
             btnBuscar.Text = "BUSCAR";
             btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click_1;
             // 
             // lblBuscar
             // 

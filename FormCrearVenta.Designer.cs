@@ -43,10 +43,10 @@
             btnSave.TabIndex = 21;
             btnSave.Text = "Guardar";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click_1;
             // 
             // txtIdUsuario
             // 
-            txtIdUsuario.Enabled = false;
             txtIdUsuario.Location = new Point(290, 114);
             txtIdUsuario.Name = "txtIdUsuario";
             txtIdUsuario.Size = new Size(150, 31);
@@ -65,7 +65,6 @@
             // 
             // txtComentarios
             // 
-            txtComentarios.Enabled = false;
             txtComentarios.Location = new Point(290, 269);
             txtComentarios.Name = "txtComentarios";
             txtComentarios.Size = new Size(150, 31);

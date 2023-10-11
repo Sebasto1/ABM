@@ -22,7 +22,32 @@ namespace ABM
 
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
+
+        private void MostrarVenta(Venta venta)
+        {
+            txtId.Text = venta.Id.ToString();
+            txtIdUsuario.Text = venta.IdUsuario.ToString();
+            txtComentarios.Text = venta.Comentarios;
+
+
+        }
+
+
+        private void LimpiarCajas()
+        {
+            txtId.Clear();
+            txtIdUsuario.Clear();
+            txtComentarios.Clear();
+
+
+        }
+
+        private void FormBuscarProductoVendido_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscar_Click_1(object sender, EventArgs e)
         {
             if (int.TryParse(txtBuscar.Text, out int id))
             {
@@ -44,16 +69,7 @@ namespace ABM
             }
         }
 
-        private void MostrarVenta(Venta venta)
-        {
-            txtId.Text = venta.Id.ToString();
-            txtIdUsuario.Text = venta.IdUsuario.ToString();
-            txtComentarios.Text = venta.Comentarios;
-            
-
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void btnEliminar_Click_1(object sender, EventArgs e)
         {
             if (int.TryParse(txtBuscar.Text, out int id))
             {
@@ -82,20 +98,6 @@ namespace ABM
             {
                 MessageBox.Show("ID invalida, ingrese un numero correcto");
             }
-
-        }
-
-        private void LimpiarCajas()
-        {
-            txtId.Clear();
-            txtIdUsuario.Clear();
-            txtComentarios.Clear();
-            
-
-        }
-
-        private void FormBuscarProductoVendido_Load(object sender, EventArgs e)
-        {
 
         }
     }
